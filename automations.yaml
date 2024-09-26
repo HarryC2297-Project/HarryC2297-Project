@@ -1,0 +1,38 @@
+automation:
+  - alias: Turn on light with Lumos
+    trigger:
+      platform: state
+      entity_id: sensor.wand_mic
+      to: "Lumos"
+    action:
+      - service: light.turn_on
+        entity_id: light.your_light_entity
+
+  - alias: Turn on all lights with Lumos Maxima
+    trigger:
+      platform: state
+      entity_id: sensor.wand_mic
+      to: "Lumos Maxima"
+    action:
+      - service: light.turn_on
+        entity_id: group.all_lights
+      - service: light.turn_on
+        entity_id: light.your_room_lights
+
+  - alias: Turn off lights with Nox
+    trigger:
+      platform: state
+      entity_id: sensor.wand_mic
+      to: "Nox"
+    action:
+      - service: light.turn_off
+        entity_id: group.all_lights
+
+  - alias: Handle IR signal
+    trigger:
+      platform: state
+      entity_id: binary_sensor.ir_receiver
+      to: "on"
+    action:
+      - service: light.toggle
+        entity_id: light.your_light_entity
